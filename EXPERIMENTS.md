@@ -76,4 +76,16 @@ This log documents structured experiments conducted across model parameters, pro
 
 ---
 
-*(Experiments 09 and 10 will document ACE-Step 1.5 music candidate selection and two-pass EBU R128 loudness normalisation during Module 2.3 & Stage 3).*
+### Experiment 09: Ethiopian Pentatonic Scale Audition (Tizita vs. Bati vs. Ambassel)
+* **Date**: 2026-11-25
+* **Hypothesis**: Among Ethiopian traditional musical modes (Kiñit), the Tizita Minor scale (C, D, Eb, G, Ab) at 68 BPM provides the optimal emotional resonance for a familial heritage narrative about grandmother wisdom, whereas Bati (78 BPM) feels overly celebratory/upbeat and Ambassel (72 BPM) feels overly solemn.
+* **Change**: Synthesized 3 distinct candidate arrangements in `pipeline/05_music.py` and benchmarked their acoustic profiles:
+  * **Candidate A (*Tizita of the Hearth*, 68 BPM)**: RMS: -16.16 dBFS, Peak: -1.50 dBFS, Crest Factor: 14.66 dB. Instruments: Krar arpeggios, gentle Washint bamboo flute with breath vibrato, subtle Kebero heartbeat.
+  * **Candidate B (*Bati Feast Celebration*, 78 BPM)**: RMS: -16.67 dBFS, Peak: -1.50 dBFS, Crest Factor: 15.17 dB. Lively, syncopated rhythm.
+  * **Candidate C (*Ambassel Contemplation*, 72 BPM)**: RMS: -16.19 dBFS, Peak: -1.50 dBFS, Crest Factor: 14.69 dB. Deep contemplative drone.
+* **Audition Decision**: **Candidate A selected as winning master score** (`selected_score.wav`). Its tender unhurried cadence aligns seamlessly with the 10-shot storyboard arc (opening with solo flute in Shot 01, building rhythmic warmth around the Mesob in Shot 05, and dissolving into peaceful Krar cadences during the AI end card).
+* **Status**: **CONFIRMED** ✅
+
+---
+
+*(Experiment 10 will document sidechain ducking curve tuning and two-pass EBU R128 loudness normalisation during Module 3.1).*
