@@ -23,6 +23,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import requests
 from dotenv import load_dotenv
+from PIL import Image, ImageOps
 
 from pipeline.utils.cache import compute_hash, is_cached, save_hash
 from pipeline.utils.logger import log_run
@@ -32,6 +33,13 @@ load_dotenv()
 STORYBOARD_PATH = PROJECT_ROOT / "storyboard.json"
 KEYFRAMES_DIR = PROJECT_ROOT / "outputs" / "keyframes"
 CLOUDFLARE_MODEL = "@cf/black-forest-labs/flux-1-schnell"
+
+# Authentic Habesha cultural reference photographs for key ritual scenes
+AUTHENTIC_REFERENCE_SHOTS = {
+    "shot_04": PROJECT_ROOT / "references" / "characters" / "hands_mesob_ref.jpg",
+    "shot_05": PROJECT_ROOT / "references" / "style" / "family_mesob_feast.jpg",
+    "shot_07": PROJECT_ROOT / "references" / "style" / "coffee_ceremony.jpg",
+}
 
 # Master Cinematic Movie Style Modifier
 CINEMATIC_STYLE_BLOCK = (
@@ -154,10 +162,12 @@ def generate_keyframes(target_shot: str = None, force: bool = False) -> bool:
         output_file = KEYFRAMES_DIR / f"{shot_id}.png"
 
         cinematic_prompt = build_cinematic_prompt(shot, storyboard)
+        ref_photo = AUTHENTIC_REFERENCE_SHOTS.get(shot_id)
         cache_payload = {
             "shot_id": shot_id,
             "prompt": cinematic_prompt,
-            "model": CLOUDFLARE_MODEL
+            "model": "authentic_reference_16x9" if ref_photo else CLOUDFLARE_MODEL,
+            "ref_photo": str(ref_photo.name) if ref_photo else None,
         }
 
         # Check Cache
@@ -169,13 +179,36 @@ def generate_keyframes(target_shot: str = None, force: bool = False) -> bool:
             log_run(
                 stage="03_keyframes",
                 target=output_file.name,
-                model="flux-1-schnell",
+                model="authentic_reference" if ref_photo else "flux-1-schnell",
                 parameters={"shot_id": shot_id, "prompt_hash": compute_hash(cinematic_prompt)},
                 latency_seconds=0.001,
                 cost_usd=0.0,
                 status="cached",
                 metadata={"shot_id": shot_id, "title": title}
             )
+            continue
+
+        if ref_photo and ref_photo.exists():
+            print(f"\n[AUTHENTIC REFERENCE] {shot_id}: \"{title}\" -> {ref_photo.name}")
+            t0 = time.time()
+            img = Image.open(ref_photo).convert("RGB")
+            framed = ImageOps.fit(img, (1920, 1080), method=Image.Resampling.LANCZOS)
+            framed.save(output_file, format="PNG")
+            latency = round(time.time() - t0, 3)
+            file_kb = round(output_file.stat().st_size / 1024, 1)
+            save_hash(output_file, cache_payload)
+            log_run(
+                stage="03_keyframes",
+                target=output_file.name,
+                model="authentic_reference_16x9",
+                parameters={"shot_id": shot_id, "source": ref_photo.name},
+                latency_seconds=latency,
+                cost_usd=0.0,
+                status="success",
+                metadata={"shot_id": shot_id, "title": title, "resolution": "1920x1080"}
+            )
+            print(f"  [✓] SUCCESS: {output_file.name} framed to 1920x1080 ({file_kb} KB) in {latency:.2f}s")
+            generated_count += 1
             continue
 
         print(f"\n[GENERATING KEYFRAME] {shot_id}: \"{title}\"")
