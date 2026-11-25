@@ -98,3 +98,13 @@ This log documents structured experiments conducted across model parameters, pro
   * Final Film Verification via `ebur128`: Confirmed **-14.0 LUFS** integrated loudness (0.0 LU deviation).
 * **Status**: **CONFIRMED** ✅
 
+---
+
+### Experiment 11: Reference-Grounded Keyframes vs. Text-Only FLUX for Cultural Rituals
+* **Date**: 2026-11-25
+* **Hypothesis**: Text-only generation with distilled `@cf/black-forest-labs/flux-1-schnell` lacks visual priors for Ethiopian-specific objects (*Mesob*, *Injera*, *Gursha*, *Jebena*, *Rekebot*), whereas grounding key ritual shots in authentic Habesha reference photos (`references/`) and adding explicit negative constraints for `shot_06`/`shot_08` eliminates cultural hallucination.
+* **Change**: Updated `pipeline/03_keyframes.py` to frame curated Habesha reference photos (`hands_mesob_ref.jpg`, `family_mesob_feast.jpg`, `coffee_ceremony.jpg`) to `1920×1080` for `shot_04`, `shot_05`, and `shot_07`, and rewrote `shot_06` (*Gursha*) and `shot_08` (*Mikir*) prompts in `storyboard.json`.
+* **Result**: Visual inspection confirmed all 5 shots transformed from westernized/hallucinated scenes (white floor sheet, bread bun, generic bowl) into authentic Ethiopian cultural depictions (woven Mesob with teff injera/Doro Wat, rolled injera Gursha, black clay Jebena & Rekebot with Sini cups). Re-rendered Stage 04 (`54.67s`) and Stage 06 (`film_16x9.mp4`: `32.14 MB`, `film_9x16.mp4`: `33.15 MB`).
+* **Status**: **CONFIRMED** ✅
+
+

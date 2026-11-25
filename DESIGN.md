@@ -69,3 +69,17 @@ Every shot in `storyboard.json` exists for a concrete narrative, emotional, or p
   3. *AI Disclosure*: The 7-second end card was found respectful, clearly crediting the family heritage while transparently disclosing the multi-model pipeline.
 * **Verdict**: **Approved for Final Release** ✅
 
+---
+
+### User Test 3 (Optional Blind Preference Check): Before vs. After Habesha Visual Grounding
+To quantify whether grounding `shot_04`–`shot_07` in authentic Ethiopian references improved cultural resonance over text-only FLUX keyframes, show the old vs. updated frames side-by-side to 5 family/community viewers without labeling which is which:
+
+| Viewer | Shot 04 (Mesob Prep) | Shot 05 (Family Mesob) | Shot 06 (Gursha) | Shot 07 (Buna Ceremony) | Notes |
+| :---: | :---: | :---: | :---: | :---: | :--- |
+| **Viewer 1** | _[A / B]_ | _[A / B]_ | _[A / B]_ | _[A / B]_ | _Pending live viewer tally_ |
+| **Viewer 2** | _[A / B]_ | _[A / B]_ | _[A / B]_ | _[A / B]_ | _Pending live viewer tally_ |
+| **Viewer 3** | _[A / B]_ | _[A / B]_ | _[A / B]_ | _[A / B]_ | _Pending live viewer tally_ |
+| **Viewer 4** | _[A / B]_ | _[A / B]_ | _[A / B]_ | _[A / B]_ | _Pending live viewer tally_ |
+| **Viewer 5** | _[A / B]_ | _[A / B]_ | _[A / B]_ | _[A / B]_ | _Pending live viewer tally_ |
+
+

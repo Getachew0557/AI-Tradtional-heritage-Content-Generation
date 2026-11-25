@@ -233,7 +233,7 @@ To go beyond the single-language floor, we built [`pipeline/benchmark_tts.py`](.
 ### Next Engineering Steps
 1. **Multimodal Reference-Conditioned Image-to-Image**: Run FLUX.2 klein / Gemini image editing with `references/` passed as image inputs once paid/organization quota is attached, eliminating manual reference framing for ritual shots.
 2. **True Diffusion Video for All 10 Shots**: Batch-render all 10 `outputs/shots/*.mp4` clips through `notebooks/04_wan2_video_generator.ipynb` on Kaggle 2×T4 / Colab and compare viewer preference against the FFmpeg Ken Burns baseline.
-3. **Interactive Family Story Web App**: Wrap `run.py` behind a lightweight Gradio/FastAPI form so non-technical relatives can enter their own Amharic family memories and export a 90-second subtitled film.
+3. **Interactive Family Story Web App**: Wrap `run.py` behind a lightweight Gradio/FastAPI form so non-technical relatives can enter their own Amharic family memories and export a 90-second subtitled film (extending our static showcase at `showcase/index.html`).
 
 ### The Forward-Deployed Perspective
 This project demonstrates that the true differentiator in modern AI engineering is not access to costly proprietary frontier APIs, but **orchestration with judgement**:

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>የቤታችን ትውስታ — The Memories of Our Home | AI Heritage Short</title>
+  <style>
+    :root {
+      --bg: #120e0b;
+      --surface: #1d1611;
+      --surface-2: #281e17;
+      --gold: #e4a94d;
+      --ochre: #c86d3b;
+      --green: #3b8c5a;
+      --text: #f5ede4;
+      --muted: #b8a898;
+      --border: rgba(228, 169, 77, 0.22);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #241912 0%, var(--bg) 60%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .tibeb-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--green) 0 24px,
+        var(--gold) 24px 48px,
+        var(--ochre) 48px 72px
+      );
+    }
+    header {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 24px 28px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(228, 169, 77, 0.14);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff8f0;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .logline {
+      max-width: 760px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+    }
+    .stat strong { color: var(--gold); }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 24px 64px;
+    }
+    section { margin-top: 42px; }
+    h2 {
+      font-size: 1.5rem;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    .players {
+      display: grid;
+      grid-template-columns: 1.65fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .players { grid-template-columns: 1fr; }
+    }
+    .player-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .player-card h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .player-card span.meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    video {
+      width: 100%;
+      border-radius: 10px;
+      background: #000;
+      display: block;
+      max-height: 540px;
+    }
+
+    .shots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .shot-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .shot-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #0c0907;
+    }
+    .shot-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .shot-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .shot-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .amharic {
+      font-size: 0.96rem;
+      color: #fff6eb;
+      background: var(--surface-2);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+    }
+    .english {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .cam-note {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #9f8f80;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .ethics-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .ethics-box h4 { color: var(--gold); margin-bottom: 6px; }
+    .ethics-box p { color: var(--muted); font-size: 0.92rem; }
+
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="tibeb-bar"></div>
+  <header>
+    <div class="badge">AI-Content Generation: The Heritage Short</div>
+    <h1>የቤታችን ትውስታ</h1>
+    <div class="subtitle">The Memories of Our Home — 90-Second Amharic Heritage Short</div>
+    <p class="logline">
+      A multigenerational Ethiopian family gathering celebrating love, culinary heritage around the Mesob,
+      the tender Gursha of blessing, the sacred Buna ceremony, and ancestral Mikir.
+    </p>
+    <div class="stats">
+      <div class="stat"><strong>90.00s</strong> Exact Contract</div>
+      <div class="stat"><strong>am-ET</strong> + English Subtitles</div>
+      <div class="stat"><strong>-14.0 LUFS</strong> EBU R128 Mix</div>
+      <div class="stat"><strong>$0.00</strong> Zero-Cost Stack</div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Master Films (16:9 Landscape &amp; 9:16 Vertical)</h2>
+      <div class="players">
+        <div class="player-card">
+          <h3>
+            <span>16:9 Broadcast Master</span>
+            <span class="meta">1920×1080 • 24fps • H.264 / AAC</span>
+          </h3>
+          <video controls preload="metadata" poster="../outputs/keyframes/shot_05.png">
+            <source src="../outputs/final/film_16x9.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <div class="player-card">
+          <h3>
+            <span>9:16 Mobile Master</span>
+            <span class="meta">1080×1920 • Safe-Zone Subtitles</span>
+          </h3>
+          <video controls preload="metadata" poster="../outputs/keyframes/shot_06.png">
+            <source src="../outputs/final/film_9x16.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>10-Shot Storyboard, Keyframes &amp; Bilingual Script</h2>
+      <div class="shots-grid" id="shots-grid"></div>
+    </section>
+
+    <section>
+      <h2>AI Transparency, Cultural Grounding &amp; Architecture</h2>
+      <div class="ethics-box">
+        <div>
+          <h4>1. Single-Contract Pipeline</h4>
+          <p>All 6 stages read from <code>storyboard.json</code> (Draft-07 schema validated) with SHA-256 per-shot caching and append-only telemetry in <code>runs.jsonl</code>.</p>
+        </div>
+        <div>
+          <h4>2. Cultural Authenticity</h4>
+          <p>Key ritual shots (Mesob prep, family Mesob feast, Buna ceremony with Jebena &amp; Rekebot) are grounded in authentic Habesha references alongside custom Gursha and Mikir frames.</p>
+        </div>
+        <div>
+          <h4>3. AI Disclosure</h4>
+          <p>Includes a 7-second on-screen AI attribution end card (Shot 10), recorded consent registry in <code>ETHICS.md</code>, and platform AI labeling.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Built by Getachew Getu Enyew • Reproducible via <code>python run.py --all</code>
+  </footer>
+
+  <script>
+    const FALLBACK_SHOTS = [
+      { shot_id: "shot_01", start_time: 0, end_time: 7, title: "The Place Where Memories Begin", camera: { movement: "slow dolly push-in", shot_size: "wide establishing" }, narration: { text_amharic: "ቤታችን ለእኛ የመኖሪያ ቦታ ብቻ አይደለም። የፍቅራችን፣ የትዝታችንና የአንድነታችን መገኛ ነው።", translation_english: "Our home is more than a place to live. It is where our love, memories, and unity belong." } },
+      { shot_id: "shot_02", start_time: 7, end_time: 15, title: "The Hands That Preserve Tradition", camera: { movement: "gentle slow orbit", shot_size: "close-up insert" }, narration: { text_amharic: "በደስታም ሆነ በፈተና ጊዜ አብረን እንቆማለን። እናቶቻችን በጥበብ ቤታችንን ያቆማሉ።", translation_english: "In times of joy and struggle, we stand united. Our mothers sustain our home with wisdom." } },
+      { shot_id: "shot_03", start_time: 15, end_time: 23, title: "When Family Comes Together", camera: { movement: "slow lateral tracking pan", shot_size: "medium wide" }, narration: { text_amharic: "ምንም ያህል ርቀን ብንሄድም፣ የቤተሰብ ፍቅር ሁልጊዜ ወደ ቤታችን ይመልሰናል።", translation_english: "No matter how far we travel, family love always brings us back home." } },
+      { shot_id: "shot_04", start_time: 23, end_time: 32, title: "Preparing the Shared Feast", camera: { movement: "slow downward crane rotation", shot_size: "top-down overhead" }, narration: { text_amharic: "አብረን እንዘጋጃለን፣ አብረን እንበላለን፣ እንሳቃለን፣ እንመካከራለን።", translation_english: "We prepare together, eat together, laugh together, and share our counsel." } },
+      { shot_id: "shot_05", start_time: 32, end_time: 43, title: "One Mesob, Many Generations", camera: { movement: "slow 180-degree circular pan", shot_size: "medium group" }, narration: { text_amharic: "በአንድ መሶብ ዙሪያ ምግብ ብቻ ሳይሆን፣ ፍቅርን፣ ክብርንና የትውልድ አንድነትን እንካፈላለን።", translation_english: "Around one mesob, we share more than food. We share love, respect, and generational unity." } },
+      { shot_id: "shot_06", start_time: 43, end_time: 51, title: "The Gursha of Blessing", camera: { movement: "subtle slow-motion push-in", shot_size: "intimate close-up" }, narration: { text_amharic: "አንዳንድ ጊዜ ፍቅር የሚገለጸው በታላላቅ ቃላት ሳይሆን፣ በእንዲህ ባሉ ትናንሽ እንክብካቤዎች ነው።", translation_english: "Sometimes love is expressed not through grand words, but through these quiet, tender gestures." } },
+      { shot_id: "shot_07", start_time: 51, end_time: 62, title: "The Sacred Coffee Ceremony", camera: { movement: "slow upward pedestal and tilt", shot_size: "medium close-up" }, narration: { text_amharic: "የቡናው መዓዛና ጭስ ሰብስቦን፣ የልብ ጨዋታና የእንግዳ ተቀባይነት ወጋችን ይፈሳል።", translation_english: "The aroma and smoke of coffee gather us, making room for true hospitality and heartfelt conversations." } },
+      { shot_id: "shot_08", start_time: 62, end_time: 72, title: "Stories Passed Between Generations", camera: { movement: "slow zoom-in and rack focus", shot_size: "medium narrative" }, narration: { text_amharic: "የአባቶቻችን ባህል፣ የእናቶቻችን ምክርና የቤተሰባችን ፍቅር ከትውልድ ወደ ትውልድ ይተላለፋል።", translation_english: "The traditions of our ancestors, the counsel of our mothers, and our family love pass from generation to generation." } },
+      { shot_id: "shot_09", start_time: 72, end_time: 83, title: "What Remains Across Time", camera: { movement: "grand slow dolly pull-back", shot_size: "wide portrait tableau" }, narration: { text_amharic: "ምክንያቱም ቤተሰብ ማለት አብሮ መኖር ብቻ ሳይሆን፣ አብሮ መኖርን ትርጉም የሚሰጥ ፍቅር ነው።", translation_english: "Because family is not simply living together; it is the love that gives meaning to being together." } },
+      { shot_id: "shot_10", start_time: 83, end_time: 90, title: "Heritage End Card & AI Disclosure", camera: { movement: "locked-off static", shot_size: "medium insert" }, narration: { text_amharic: "[Solo Krar Musical Resolve]", translation_english: "Our traditions live through us. — AI-assisted film orchestration." } }
+    ];
+
+    function renderShots(shots) {
+      const grid = document.getElementById("shots-grid");
+      grid.innerHTML = shots.map((s, idx) => {
+        const num = String(idx + 1).padStart(2, "0");
+        const am = (s.narration && s.narration.text_amharic) || "[Instrumental End Card]";
+        const en = (s.narration && s.narration.translation_english) || "Our traditions live through us.";
+        const cam = s.camera ? `${s.camera.shot_size} • ${s.camera.movement}` : "";
+        return `
+          <article class="shot-card">
+            <img src="../outputs/keyframes/${s.shot_id}.png" alt="${s.title}" loading="lazy" />
+            <div class="shot-body">
+              <div class="shot-top">
+                <span>SHOT ${num}</span>
+                <span>${s.start_time.toFixed(1)}s – ${s.end_time.toFixed(1)}s</span>
+              </div>
+              <div class="shot-title">${s.title}</div>
+              <div class="amharic">${am}</div>
+              <div class="english">${en}</div>
+              <div class="cam-note">${cam}</div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    fetch("../storyboard.json")
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => renderShots(data.shots || FALLBACK_SHOTS))
+      .catch(() => renderShots(FALLBACK_SHOTS));
+  </script>
+</body>
+</html>

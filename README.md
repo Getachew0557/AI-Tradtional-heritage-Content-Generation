@@ -28,6 +28,7 @@ The pipeline follows a single contract (`storyboard.json`), validated before eve
 ```
 ethiopian-heritage-short/
 ├── README.md                       # Complete guide, execution steps, and costs
+├── run.py                          # One-command studio orchestrator (--all / --verify / --shot)
 ├── storyboard.json                 # THE CONTRACT: 10 shots, durations, prompts, narration, cues
 ├── runs.jsonl                      # Append-only model telemetry log (latency, seed, cost, status)
 ├── requirements.txt                # Pinned dependencies
@@ -41,8 +42,11 @@ ethiopian-heritage-short/
 │   ├── 02_narration.py             # Generates Amharic voiceovers line-by-line via Gemini TTS
 │   ├── 03_keyframes.py             # Generates keyframes via Cloudflare Workers AI (FLUX)
 │   ├── 04_shots.py                 # Motion synthesis (Wan 2.2 on Kaggle / local Ken Burns)
-│   ├── 05_music.py                 # Original Ethiopian heritage score via ACE-Step 1.5
+│   ├── 05_music.py                 # Original Ethiopian heritage score (Kiñit pentatonic / ACE-Step)
 │   ├── 06_assemble.py              # FFmpeg compositor: ducking, subtitles, end card, 16:9 & 9:16
+│   ├── assemble_radio_cut.py       # Phase 1 Radio Cut animatic builder
+│   ├── assemble_rough_cut.py       # Phase 2 Rough Cut checkpoint builder
+│   ├── benchmark_tts.py            # Ceiling work: Amharic vs. English TTS pacing benchmark
 │   └── utils/
 │       ├── logger.py               # Telemetry writer appending to runs.jsonl
 │       ├── cache.py                # SHA-256 hash caching utility
@@ -59,8 +63,14 @@ ethiopian-heritage-short/
 │   ├── keyframes/                  # Still keyframe images (.png)
 │   ├── shots/                      # Motion clips (.mp4)
 │   ├── music/                      # Score candidates and chosen track
+│   ├── rough_cut/                  # Phase 2 Rough Cut checkpoint
+│   ├── benchmarks/                 # Multilingual TTS benchmark JSON & audio samples
 │   └── final/                      # Finished masters (film_16x9.mp4 and film_9x16.mp4)
 │
+├── docs/
+│   └── REPORT.md                   # Final Engineering & Artistic Report
+├── showcase/
+│   └── index.html                  # Zero-dependency static film & storyboard showcase page
 ├── DESIGN.md                       # Audience definition, intent, shot reasons, user test notes
 ├── ARCHITECTURE.md                 # Contracts, caching, state boundaries, failure recovery
 ├── EXPERIMENTS.md                  # 10+ logged hypothesis -> change -> result entries
@@ -126,12 +136,13 @@ For running heavy open-weight models on borrowed GPUs (Kaggle dual Tesla T4s):
 ---
 
 ## 📚 Core Project Documentation
-* [DESIGN.md](DESIGN.md): The human story, audience definition, character bibles, and User Tests 1 & 2.
-* [ARCHITECTURE.md](ARCHITECTURE.md): Schema contracts, multi-model state boundaries, and caching.
+* [docs/REPORT.md](docs/REPORT.md): Final Engineering & Artistic Report (rubric reflection, ceiling benchmark, and forward-deployed insights).
+* [DESIGN.md](DESIGN.md): The human story, audience definition, shot justifications, and User Tests 1 & 2.
+* [ARCHITECTURE.md](ARCHITECTURE.md): Schema contracts, multi-model state boundaries, and SHA-256 caching.
 * [EXPERIMENTS.md](EXPERIMENTS.md): 10 logged experiments (Hypothesis → Change → Result).
-* [FAILURES.md](FAILURES.md): Blocker & troubleshooting journal (Gemini deprecations, Kaggle token auth, FFmpeg paths, Wan 404s).
+* [FAILURES.md](FAILURES.md): Blocker & troubleshooting journal (Gemini deprecations, TTS preamble leak, cultural drift, Kaggle token auth, FFmpeg paths, Wan 404s).
 * [COSTS.md](COSTS.md): Latency, GPU minutes, and $0.00 actual vs $14.36 frontier equivalent spend.
-* [ETHICS.md](ETHICS.md): Cultural sensitivity, consent, voice ownership, and AI transparency disclosure.
+* [ETHICS.md](ETHICS.md): Cultural sensitivity, consent registry, licenses, and AI transparency disclosure.
 
 
 ---
@@ -140,13 +151,25 @@ For running heavy open-weight models on borrowed GPUs (Kaggle dual Tesla T4s):
 
 | Stage | Model / Tool | Platform | Spend | List-Price Equivalent |
 | :--- | :--- | :--- | :---: | :---: |
-| **Agent / Orchestrator** | Gemini 3.8 Flash / Flash-Lite | Google AI Studio | $0.00 | ~$0.15 |
-| **Narration** | Gemini 3.8 Flash TTS (Amharic) | Google AI Studio | $0.00 | ~$0.30 |
-| **Keyframes** | FLUX.1 schnell / FLUX.2 klein | Cloudflare Workers AI | $0.00 | ~$0.80 |
-| **Moving Shots** | Wan 2.2 TI2V-5B (Image-to-Video) | Kaggle (2x T4 GPU) / FFmpeg | $0.00 | ~$9.50 |
-| **Music Score** | ACE-Step 1.5 | Kaggle (T4 GPU) | $0.00 | ~$2.00 |
-| **Assembly** | FFmpeg 9.0.2 | Local CPU | $0.00 | ~$0.00 |
-| **Total** | | | **$0.00** | **~$12.75** |
+| **Agent / Orchestrator** | Gemini 3.8 Flash / Flash-Lite | Google AI Studio | $0.00 | ~$0.25 |
+| **Narration** | Gemini 3.8 Flash TTS (Amharic) | Google AI Studio | $0.00 | ~$0.36 |
+| **Keyframes** | FLUX.1 schnell + Reference Framing | Cloudflare Workers AI | $0.00 | ~$2.00 |
+| **Moving Shots** | Wan 2.2 TI2V-5B / Ken Burns | Kaggle (2x T4 GPU) / CPU | $0.00 | ~$8.75 |
+| **Music Score** | ACE-Step 1.5 / Kiñit Acoustic | Kaggle (T4 GPU) / Local | $0.00 | ~$1.00 |
+| **Assembly & Mastering** | FFmpeg 9.0.2 | Local CPU | $0.00 | ~$2.00 |
+| **Total** | | | **$0.00** | **~$14.36** |
+
+> See [COSTS.md](COSTS.md) for the complete stage-by-stage breakdown and list-price assumptions.
+
+---
+
+## 🔬 Ceiling Work: Multilingual TTS Benchmark
+
+To evaluate speech pacing across languages, run the Amharic vs. English TTS benchmark:
+```bash
+python pipeline/benchmark_tts.py
+```
+Results are saved to [`outputs/benchmarks/multilingual_tts_benchmark.json`](outputs/benchmarks/multilingual_tts_benchmark.json) and summarized in [`docs/REPORT.md`](docs/REPORT.md).
 
 ---
 
@@ -157,11 +180,11 @@ For running heavy open-weight models on borrowed GPUs (Kaggle dual Tesla T4s):
 | **01** | 00–07s (7s) | Hearth of Memories | ቤታችን ለእኛ የመኖሪያ ቦታ ብቻ አይደለም... | Slow dolly push-in on morning dawn light |
 | **02** | 07–15s (8s) | Hands of Tradition | በደስታም ሆነ በፈተና ጊዜ አብረን እንቆማለን... | Close-up insert: pouring teff batter on mitad |
 | **03** | 15–23s (8s) | Warm Homecoming | ምንም ያህል ርቀን ብንሄድም... | Medium wide shot: family arriving & embracing |
-| **04** | 23–32s (9s) | Preparing the Feast | አብረን እንዘጋጃለን፣ አብረን እናዘጋጃለን... | Top-down overhead: arranging injera on mesob |
-| **05** | 32–43s (11s) | One Mesob | በአንድ መሶብ ዙሪያ ምግብ ብቻ ሳይሆን... | 180° pan: 3 generations sharing meal |
-| **06** | 43–51s (8s) | Gursha of Blessing | አንዳንድ ጊዜ ፍቅር የሚገለጸው... | Intimate close-up: grandmother feeding grandchild |
-| **07** | 51–62s (11s) | Coffee Ceremony | የቡናው መዓዛና ጭስ ሰብስቦን... | Low-angle tilt: smoking frankincense & jebena |
-| **08** | 62–72s (10s) | Ancestral Wisdom | የአባቶቻችን ባህል፣ የእናቶቻችን ምክር... | Rack focus: grandfather storytelling to children |
+| **04** | 23–32s (9s) | Preparing the Feast | አብረን እንዘጋጃለን፣ አብረን እንበላለን... | Top-down overhead: authentic injera & Doro Wat on mesob |
+| **05** | 32–43s (11s) | One Mesob | በአንድ መሶብ ዙሪያ ምግብ ብቻ ሳይሆን... | 180° pan: 3 generations sharing meal around mesob |
+| **06** | 43–51s (8s) | Gursha of Blessing | አንዳንድ ጊዜ ፍቅር የሚገለጸው... | Intimate close-up: grandmother feeding gursha to grandson |
+| **07** | 51–62s (11s) | Coffee Ceremony | የቡናው መዓዛና ጭስ ሰብስቦን... | Low-angle tilt: clay jebena, rekebot & sini cups |
+| **08** | 62–72s (10s) | Ancestral Wisdom | የአባቶቻችን ባህል፣ የእናቶቻችን ምክር... | Rack focus: grandfather sharing mikir with children |
 | **09** | 72–83s (11s) | What Remains | ምክንያቱም ቤተሰብ ማለት አብሮ መኖር ብቻ ሳይሆን... | Grand dolly pull-back: family portrait at sunset |
 | **10** | 83–90s (7s) | AI End Card | [Solo krar resolve] | Locked-off: mesob, candle & AI transparency notice |
 
