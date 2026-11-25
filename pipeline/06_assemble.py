@@ -308,9 +308,19 @@ def assemble_final_film(aspect_ratio: str = "16:9", force: bool = False) -> Path
     # Use relative forward-slash path to avoid Windows drive colon escaping issues in FFmpeg filter syntax
     sub_arg = f"outputs/final/{sub_path.name}"
     
-    # 2. Master Audio
+    # 2. Master Audio (rebuild if missing, forced, or any narration/music input is newer)
     master_audio = FINAL_DIR / "master_audio.wav"
-    if not master_audio.exists():
+    input_stems = [MUSIC_DIR / "selected_score.wav"] + [
+        NARRATION_DIR / f"{s['shot_id']}.wav" for s in shots
+    ]
+    newest_input_mtime = max(
+        (p.stat().st_mtime for p in input_stems if p.exists()),
+        default=0.0,
+    )
+    audio_stale = (not master_audio.exists()) or (
+        newest_input_mtime > master_audio.stat().st_mtime
+    )
+    if force or audio_stale:
         master_audio = master_audio_track(storyboard)
         
     # 3. Video Concat list

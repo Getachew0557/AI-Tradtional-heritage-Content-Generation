@@ -64,18 +64,16 @@ def create_silent_audio(output_file: Path, duration_s: float = 7.0) -> None:
 def generate_single_line_with_retry(client, text_amharic: str, voice_style: str, max_retries: int = 3) -> bytes:
     """
     Generate Amharic speech bytes with automatic backoff retry on rate limits (HTTP 429).
+    IMPORTANT: Passes ONLY pure Amharic text to the TTS model to prevent the model
+    from speaking English instructions or preambles aloud.
     """
-    prompt = (
-        f"Read ONLY the following Amharic text in a natural, {voice_style} Ethiopian tone. "
-        f"Do NOT say any English words, introductions, or explanations. "
-        f"Speak only the Amharic sentence exactly as written:\n{text_amharic}"
-    )
+    clean_text = text_amharic.strip()
 
     for attempt in range(max_retries):
         try:
             response = client.models.generate_content(
                 model="gemini-3.8-flash-tts",
-                contents=prompt,
+                contents=clean_text,
                 config=types.GenerateContentConfig(
                     response_modalities=["AUDIO"]
                 )
