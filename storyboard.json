@@ -1,0 +1,338 @@
+{
+  "title": "The Memories of Our Home",
+  "title_amharic": "የቤታችን ትውስታ",
+  "logline": "A heartfelt multigenerational Ethiopian family gathering celebrating love, culinary heritage, coffee traditions, and ancestral wisdom.",
+  "total_duration_seconds": 90.0,
+  "target_aspect_ratios": ["16:9", "9:16"],
+  "style_block": "Cinematic 35mm film photography, 8k resolution, photorealistic, authentic Ethiopian cultural elements, Habesha Kemis embroidered garments, warm morning and golden hour natural sunlight, soft depth of field, tender emotional expression, earthy warm tones.",
+  "characters": {
+    "grandmother": {
+      "name": "Ayelech (Grandmother)",
+      "role": "Family Matriarch & Tradition Keeper",
+      "description": "Elderly Ethiopian woman with silver hair, gentle smiling eyes, deeply weathered hands showing decades of love, draped in pristine white cotton Netela.",
+      "reference_image": "references/characters/grandmother_ref.jpg"
+    },
+    "grandfather": {
+      "name": "Tadesse (Grandfather)",
+      "role": "Elder Storyteller & Pillar of Wisdom",
+      "description": "Dignified elderly Ethiopian grandfather with a neat white beard, wearing a traditional white turban and woven wrap, warm expressive gaze.",
+      "reference_image": "references/characters/grandfather_ref.jpg"
+    },
+    "mother": {
+      "name": "Marta (Mother)",
+      "role": "Caring Hostess & Heart of the Hearth",
+      "description": "Radiant adult Ethiopian woman in her late 30s wearing a traditional Habesha Kemis with ornate golden Tilf embroidery, elegant braided hair.",
+      "reference_image": "references/characters/mother_ref.jpg"
+    },
+    "child": {
+      "name": "Yonas (Grandson)",
+      "role": "Next Generation & Eager Listener",
+      "description": "Charming 6-year-old Ethiopian boy with joyful bright eyes, wearing a cream linen shirt with colorful geometric collar trim, barefoot on woven mat.",
+      "reference_image": "references/characters/child_ref.jpg"
+    }
+  },
+  "shots": [
+    {
+      "shot_id": "shot_01",
+      "scene_number": 1,
+      "title": "The Place Where Memories Begin",
+      "start_time": 0.0,
+      "end_time": 7.0,
+      "duration_seconds": 7.0,
+      "visual_prompt": "Cinematic wide establishing shot of an authentic Ethiopian family home interior in the early morning. Warm golden dawn sunlight streams through wooden window frames, dust motes dancing in light beams. Sheer white cotton curtains drift gently in the cool highland breeze. Authentic mud-plaster walls, handcrafted wooden stools, woven baskets hanging neatly.",
+      "motion_prompt": "Slow smooth push-in dolly forward toward the window, sheer curtain moving softly in the breeze, peaceful morning atmosphere.",
+      "camera": {
+        "movement": "slow dolly push-in",
+        "shot_size": "wide establishing shot",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/style/family_mesob_feast.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "ቤታችን ለእኛ የመኖሪያ ቦታ ብቻ አይደለም። የፍቅራችን፣ የትዝታችንና የአንድነታችን መገኛ ነው።",
+        "translation_english": "Our home is more than a place to live. It is where our love, memories, and unity belong.",
+        "voice_style": "warm, contemplative, slow, deeply heartfelt",
+        "audio_file": "outputs/narration/shot_01.wav"
+      },
+      "music_cue": {
+        "mood": "tender opening with solo washint flute and gentle krar plucks",
+        "intensity": "subtle",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_02",
+      "scene_number": 2,
+      "title": "The Hands That Preserve Tradition",
+      "start_time": 7.0,
+      "end_time": 15.0,
+      "duration_seconds": 8.0,
+      "visual_prompt": "Close-up of weathered, experienced grandmother hands carefully pouring fermented teff batter onto a hot traditional clay mitad stove in an authentic Ethiopian kitchen. Rising soft fragrant steam, circular spiral motion, natural golden hearth lighting illuminating the batter.",
+      "motion_prompt": "Gentle orbit around grandmother's hands pouring batter in smooth spiral motion, rising delicate steam.",
+      "camera": {
+        "movement": "gentle slow orbit",
+        "shot_size": "close-up insert",
+        "angle": "high-angle 45 degrees"
+      },
+      "reference_assets": ["references/characters/grandmother_ref.jpg", "references/characters/hands_mesob_ref.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "በደስታም ሆነ በፈተና ጊዜ አብረን እንቆማለን። እናቶቻችን በጥበብ ቤታችንን ያቆማሉ።",
+        "translation_english": "In times of joy and struggle, we stand united. Our mothers sustain our home with wisdom.",
+        "voice_style": "respectful, nurturing, unhurried",
+        "audio_file": "outputs/narration/shot_02.wav"
+      },
+      "music_cue": {
+        "mood": "warm rhythmic krar pattern entering in Tizita minor mode",
+        "intensity": "building",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_03",
+      "scene_number": 3,
+      "title": "When Family Comes Together",
+      "start_time": 15.0,
+      "end_time": 23.0,
+      "duration_seconds": 8.0,
+      "visual_prompt": "Medium wide shot of relatives arriving at the open doorway of the family home. Grandfather Tadesse in his white turban opens his arms in a joyous embrace as smiling relatives step inside. Warm laughter, affectionate greetings, shoulder bumps, natural midday light.",
+      "motion_prompt": "Camera tracks slowly from left to right as relatives enter and embrace, joyful body language and happy smiles.",
+      "camera": {
+        "movement": "slow lateral tracking pan",
+        "shot_size": "medium wide shot",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/characters/grandfather_ref.jpg", "references/style/family_mesob_feast.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "ምንም ያህል ርቀን ብንሄድም፣ የቤተሰብ ፍቅር ሁልጊዜ ወደ ቤታችን ይመልሰናል።",
+        "translation_english": "No matter how far we travel, family love always brings us back home.",
+        "voice_style": "joyful, affectionate, welcoming",
+        "audio_file": "outputs/narration/shot_03.wav"
+      },
+      "music_cue": {
+        "mood": "uplifting polyrhythmic Ethiopian percussion with masinko resonance",
+        "intensity": "building",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_04",
+      "scene_number": 4,
+      "title": "Preparing the Shared Feast",
+      "start_time": 23.0,
+      "end_time": 32.0,
+      "duration_seconds": 9.0,
+      "visual_prompt": "Top-down overhead cinematic view of an ornate circular woven Ethiopian mesob table. Hands of mother and grandmother placing rolled freshly baked teff injera alongside rich, spicy Doro Wat with boiled eggs, vibrant yellow Alicha, and fresh Ayib cheese in concentric artistic harmony.",
+      "motion_prompt": "Smooth slow counter-clockwise rotation descending gently toward the colorful feast.",
+      "camera": {
+        "movement": "slow downward crane rotation",
+        "shot_size": "top-down overhead",
+        "angle": "birds-eye"
+      },
+      "reference_assets": ["references/characters/hands_mesob_ref.jpg", "references/characters/mother_ref.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "አብረን እንዘጋጃለን፣ አብረን እንበላለን፣ እንሳቃለን፣ እንመካከራለን።",
+        "translation_english": "We prepare together, eat together, laugh together, and share our counsel.",
+        "voice_style": "rhythmic, lively, intimate",
+        "audio_file": "outputs/narration/shot_04.wav"
+      },
+      "music_cue": {
+        "mood": "vibrant traditional feast rhythm with kebero accents",
+        "intensity": "high",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_05",
+      "scene_number": 5,
+      "title": "One Mesob, Many Generations",
+      "start_time": 32.0,
+      "end_time": 43.0,
+      "duration_seconds": 11.0,
+      "visual_prompt": "Grand master cinematic shot of the multi-generational Ethiopian family seated tightly in a warm circle around a single large mesob. Grandparents, parents, youth, and young children in traditional white Habesha Kemis, all reaching together with their right hands, genuine joy and conversation.",
+      "motion_prompt": "Slow continuous cinematic 180-degree pan across all family members' smiling faces around the mesob.",
+      "camera": {
+        "movement": "slow 180-degree circular pan",
+        "shot_size": "medium group shot",
+        "angle": "slight low-angle"
+      },
+      "reference_assets": ["references/style/family_mesob_feast.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "በአንድ መሶብ ዙሪያ ምግብ ብቻ ሳይሆን፣ ፍቅርን፣ ክብርንና የትውልድ አንድነትን እንካፈላለን።",
+        "translation_english": "Around one mesob, we share more than food. We share love, respect, and generational unity.",
+        "voice_style": "emotional peak, resonant, grounded",
+        "audio_file": "outputs/narration/shot_05.wav"
+      },
+      "music_cue": {
+        "mood": "full traditional acoustic ensemble climax in Bati scale",
+        "intensity": "high",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_06",
+      "scene_number": 6,
+      "title": "The Gursha of Blessing",
+      "start_time": 43.0,
+      "end_time": 51.0,
+      "duration_seconds": 8.0,
+      "visual_prompt": "Intimate close-up portrait of grandmother Ayelech gently offering a loving Gursha of rolled injera to 6-year-old grandson Yonas. The grandmother's face is radiant with affection; the young boy beams with a grateful smile as he receives the bite. Soft golden rim lighting on their traditional white clothing.",
+      "motion_prompt": "Subtle slow-motion push-in as grandmother extends the gursha and the child smiles warmly.",
+      "camera": {
+        "movement": "subtle slow-motion push-in",
+        "shot_size": "intimate close-up",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/characters/grandmother_ref.jpg", "references/characters/child_ref.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "አንዳንድ ጊዜ ፍቅር የሚገለጸው በታላላቅ ቃላት ሳይሆን፣ በእንዲህ ባሉ ትናንሽ እንክብካቤዎች ነው።",
+        "translation_english": "Sometimes love is expressed not through grand words, but through these quiet, tender gestures.",
+        "voice_style": "tender, soft, emotional whisper",
+        "audio_file": "outputs/narration/shot_06.wav"
+      },
+      "music_cue": {
+        "mood": "soft krar solo melody, delicate and introspective",
+        "intensity": "subtle",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_07",
+      "scene_number": 7,
+      "title": "The Sacred Coffee Ceremony",
+      "start_time": 51.0,
+      "end_time": 62.0,
+      "duration_seconds": 11.0,
+      "visual_prompt": "Low-angle cinematic shot of the traditional Ethiopian coffee ceremony (Buna). Fresh green grass strewn on the floor, aromatic white frankincense smoke swirling upward from a small terracotta burner. Black clay Jebena pot resting on glowing red charcoals, steaming dark coffee pouring gracefully into small porcelain Sini cups.",
+      "motion_prompt": "Slow upward tilt from glowing charcoals to the streaming coffee and swirling frankincense smoke.",
+      "camera": {
+        "movement": "slow upward pedestal and tilt",
+        "shot_size": "medium close-up",
+        "angle": "low-angle"
+      },
+      "reference_assets": ["references/style/coffee_ceremony.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "የቡናው መዓዛና ጭስ ሰብስቦን፣ የልብ ጨዋታና የእንግዳ ተቀባይነት ወጋችን ይፈሳል።",
+        "translation_english": "The aroma and smoke of coffee gather us, making room for true hospitality and heartfelt conversations.",
+        "voice_style": "warm, peaceful, serene",
+        "audio_file": "outputs/narration/shot_07.wav"
+      },
+      "music_cue": {
+        "mood": "serene meditative washint flute over drone harmony",
+        "intensity": "building",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_08",
+      "scene_number": 8,
+      "title": "Stories Passed Between Generations",
+      "start_time": 62.0,
+      "end_time": 72.0,
+      "duration_seconds": 10.0,
+      "visual_prompt": "Medium shot of grandfather Tadesse leaning forward animatedly, narrating an ancestral tale with expressive hands and a warm smile. Child Yonas and other youth sit listening intently at his feet, their eyes wide with fascination in the warm ambient living room light.",
+      "motion_prompt": "Gentle zoom-in on grandfather's expressive storytelling gestures, then panning to child's captivated face.",
+      "camera": {
+        "movement": "slow zoom-in and rack focus",
+        "shot_size": "medium narrative shot",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/characters/grandfather_ref.jpg", "references/characters/child_ref.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "የአባቶቻችን ባህል፣ የእናቶቻችን ምክርና የቤተሰባችን ፍቅር ከትውልድ ወደ ትውልድ ይተላለፋል።",
+        "translation_english": "The traditions of our ancestors, the counsel of our mothers, and our family love pass from generation to generation.",
+        "voice_style": "wise, resonant, inspiring",
+        "audio_file": "outputs/narration/shot_08.wav"
+      },
+      "music_cue": {
+        "mood": "rich acoustic Ethiopian strings weaving a nostalgic theme",
+        "intensity": "high",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_09",
+      "scene_number": 9,
+      "title": "What Remains Across Time",
+      "start_time": 72.0,
+      "end_time": 83.0,
+      "duration_seconds": 11.0,
+      "visual_prompt": "Wide cinematic sunset tableau of the entire Ethiopian family gathered outdoors on the veranda in the golden sunset glow. Grandfather holding grandson's hand, mother and grandmother smiling together. Golden rays backlight their Habesha Kemis, peaceful highland hills in the soft blurred background.",
+      "motion_prompt": "Slow grand pull-back dolly revealing the whole family united against the sunset horizon.",
+      "camera": {
+        "movement": "grand slow dolly pull-back",
+        "shot_size": "wide portrait tableau",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/style/family_mesob_feast.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "ምክንያቱም ቤተሰብ ማለት አብሮ መኖር ብቻ ሳይሆን፣ አብሮ መኖርን ትርጉም የሚሰጥ ፍቅር ነው።",
+        "translation_english": "Because family is not simply living together; it is the love that gives meaning to being together.",
+        "voice_style": "climactic, deeply moving, warm resolution",
+        "audio_file": "outputs/narration/shot_09.wav"
+      },
+      "music_cue": {
+        "mood": "triumphant emotional swell resolving into peaceful acoustic guitar and flute",
+        "intensity": "resolving",
+        "ducking_db": -14.0
+      }
+    },
+    {
+      "shot_id": "shot_10",
+      "scene_number": 10,
+      "title": "Heritage End Card & AI Disclosure",
+      "start_time": 83.0,
+      "end_time": 90.0,
+      "duration_seconds": 7.0,
+      "visual_prompt": "Elegant minimalist close-up of a handcrafted Ethiopian mesob and a steaming clay jebena resting on polished natural wood under warm candlelight. Deep dark vignette edges, soft golden candlelight flickering gently.",
+      "motion_prompt": "Static locked-off camera with subtle flickering candlelight reflections and soft fading smoke.",
+      "camera": {
+        "movement": "locked-off static",
+        "shot_size": "medium insert",
+        "angle": "eye-level"
+      },
+      "reference_assets": ["references/style/coffee_ceremony.jpg"],
+      "narration": {
+        "language": "am-ET",
+        "text_amharic": "",
+        "translation_english": "",
+        "voice_style": "music only, silent voice",
+        "audio_file": "outputs/narration/shot_10.wav"
+      },
+      "music_cue": {
+        "mood": "soft solo krar harmonic cadence fading peacefully into silence",
+        "intensity": "resolving",
+        "ducking_db": 0.0
+      }
+    }
+  ],
+  "music_track": {
+    "title": "Tizita of the Hearth",
+    "style": "Traditional Ethiopian Pentatonic Acoustic Heritage Score",
+    "scale": "Tizita Minor / Bati",
+    "tempo_bpm": 68,
+    "instruments": [
+      "Krar (Ethiopian 5-string lyre)",
+      "Washint (Bamboo flute)",
+      "Masinko (Single-string bowed fiddle)",
+      "Kebero (Gentle acoustic hand drum)"
+    ],
+    "caption_prompt": "Gentle Ethiopian acoustic folk score, meditative Tizita pentatonic scale, solo acoustic krar plucks with delicate washint bamboo flute melodies, soft kebero hand drum rhythm, cinematic emotional atmosphere, broadcast film quality, no vocals.",
+    "target_duration_seconds": 90.0
+  },
+  "end_card": {
+    "title_amharic": "የቤታችን ትውስታ",
+    "title_english": "The Memories of Our Home",
+    "tagline_amharic": "ባህላችን በእኛ ውስጥ ይኖራል።",
+    "tagline_english": "Our traditions live through us.",
+    "ai_disclosure_text": "Created with AI-assisted pipeline orchestration (Gemini 3.8 Flash, FLUX, Wan 2.2, ACE-Step 1.5, FFmpeg).",
+    "duration_seconds": 7.0
+  }
+}

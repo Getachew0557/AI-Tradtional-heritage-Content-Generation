@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HeritageShortStoryboard",
+  "description": "Validated contract for 'AI-Content Generation: The Heritage Short' pipeline stages",
+  "type": "object",
+  "required": [
+    "title",
+    "title_amharic",
+    "total_duration_seconds",
+    "target_aspect_ratios",
+    "style_block",
+    "shots",
+    "music_track",
+    "end_card"
+  ],
+  "properties": {
+    "title": { "type": "string" },
+    "title_amharic": { "type": "string" },
+    "logline": { "type": "string" },
+    "total_duration_seconds": {
+      "type": "number",
+      "minimum": 60.0,
+      "maximum": 90.0
+    },
+    "target_aspect_ratios": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["16:9", "9:16"] },
+      "minItems": 2
+    },
+    "style_block": { "type": "string" },
+    "characters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "role", "description", "reference_image"],
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "description": { "type": "string" },
+          "reference_image": { "type": "string" }
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "shot_id",
+          "scene_number",
+          "title",
+          "start_time",
+          "end_time",
+          "duration_seconds",
+          "visual_prompt",
+          "motion_prompt",
+          "camera",
+          "narration",
+          "music_cue"
+        ],
+        "properties": {
+          "shot_id": {
+            "type": "string",
+            "pattern": "^shot_[0-9]{2}$"
+          },
+          "scene_number": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string" },
+          "start_time": { "type": "number", "minimum": 0.0 },
+          "end_time": { "type": "number", "minimum": 0.0 },
+          "duration_seconds": { "type": "number", "minimum": 2.0, "maximum": 15.0 },
+          "visual_prompt": { "type": "string" },
+          "motion_prompt": { "type": "string" },
+          "camera": {
+            "type": "object",
+            "required": ["movement", "shot_size", "angle"],
+            "properties": {
+              "movement": { "type": "string" },
+              "shot_size": { "type": "string" },
+              "angle": { "type": "string" }
+            }
+          },
+          "reference_assets": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "narration": {
+            "type": "object",
+            "required": [
+              "language",
+              "text_amharic",
+              "translation_english",
+              "voice_style",
+              "audio_file"
+            ],
+            "properties": {
+              "language": { "type": "string", "enum": ["am-ET", "en-US"] },
+              "text_amharic": { "type": "string" },
+              "translation_english": { "type": "string" },
+              "voice_style": { "type": "string" },
+              "audio_file": { "type": "string" }
+            }
+          },
+          "music_cue": {
+            "type": "object",
+            "required": ["mood", "intensity", "ducking_db"],
+            "properties": {
+              "mood": { "type": "string" },
+              "intensity": { "type": "string", "enum": ["subtle", "building", "high", "resolving"] },
+              "ducking_db": { "type": "number", "maximum": 0.0 }
+            }
+          }
+        }
+      }
+    },
+    "music_track": {
+      "type": "object",
+      "required": [
+        "title",
+        "style",
+        "scale",
+        "tempo_bpm",
+        "instruments",
+        "caption_prompt",
+        "target_duration_seconds"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "style": { "type": "string" },
+        "scale": { "type": "string" },
+        "tempo_bpm": { "type": "integer", "minimum": 40, "maximum": 180 },
+        "instruments": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "caption_prompt": { "type": "string" },
+        "target_duration_seconds": { "type": "number" }
+      }
+    },
+    "end_card": {
+      "type": "object",
+      "required": [
+        "title_amharic",
+        "title_english",
+        "tagline_amharic",
+        "tagline_english",
+        "ai_disclosure_text",
+        "duration_seconds"
+      ],
+      "properties": {
+        "title_amharic": { "type": "string" },
+        "title_english": { "type": "string" },
+        "tagline_amharic": { "type": "string" },
+        "tagline_english": { "type": "string" },
+        "ai_disclosure_text": { "type": "string" },
+        "duration_seconds": { "type": "number" }
+      }
+    }
+  }
+}
