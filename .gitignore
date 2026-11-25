@@ -24,6 +24,7 @@ desktop.ini
 outputs/**/temp/
 outputs/final/*.mp4
 outputs/radio_cut/*.mp4
+outputs/rough_cut/*.mp4
 !outputs/**/.gitkeep
 
 # Virtual environment folders
