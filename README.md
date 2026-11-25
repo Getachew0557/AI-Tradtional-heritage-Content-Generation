@@ -71,8 +71,6 @@ ethiopian-heritage-short/
 
 ---
 
-## ⚡ Quickstart: Run from a Clean Clone
-
 ## ⚡ One-Command Execution: Run from a Clean Clone
 
 A stranger can clone this repository, run one single command, and regenerate the entire film from its storyboard:

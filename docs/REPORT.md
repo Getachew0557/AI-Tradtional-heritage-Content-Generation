@@ -137,6 +137,8 @@ As the challenge prompt noted: *"Expect some of what we write here to be out of 
 | **03** | Kaggle HTTP 404 with `KGAT_` token | Kaggle introduced new API access token format replacing legacy `kaggle.json`. | Configured `~/.kaggle/access_token` and verified via official `kaggle.api.authenticate()`. |
 | **04** | `ffmpeg: command not found` | User machine lacked Windows global administrator PATH privileges. | Bundled `imageio-ffmpeg` in `agentic_env` and built `pipeline/utils/ffmpeg_helper.py` to auto-discover static FFmpeg 9.0.2 executable. |
 | **05** | `Wan2.2-TI2V-5B 404 Client Error` on HuggingFace | Wan models on HuggingFace are named `Wan2.1-I2V-14B-480P-Diffusers` (requiring ~28GB VRAM) and `Wan2.1-T2V-1.3B-Diffusers`. | Updated `notebooks/04_wan2_video_generator.ipynb` to use `StableVideoDiffusionPipeline` with CPU offloading (`enable_model_cpu_offload()`) for guaranteed 16GB T4 VRAM execution. |
+| **06** | Spoken English prompt preamble in `film_16x9.mp4` | `gemini-3.8-flash-tts` read English instructions in `contents` aloud, and `06_assemble.py` reused cached `master_audio.wav` despite `--force`. | Isolated `02_narration.py` to raw Amharic text only, trimmed preambles, fixed `master_audio.wav` staleness check in `06_assemble.py`, and audited the full 90s MP4 audio track. |
+| **07** | Cultural drift on Mesob, Gursha, and Jebena in keyframes | Text-only FLUX.1-schnell lacked Ethiopian culinary/ritual priors; Gemini image models hit free-tier `429`/`503`. | Grounded `shot_04`, `shot_05`, and `shot_07` in authentic Habesha reference photos (`1920×1080`) in `03_keyframes.py` and refined `shot_06`/`shot_08` prompts in `storyboard.json`. |
 
 ---
 
@@ -200,12 +202,44 @@ If produced using proprietary paid frontier platforms:
 
 ---
 
-## 8. Conclusion: The Forward-Deployed Perspective
+## 8. Suggested Practices Tested Honestly
 
+### Practice That Beat My Instinct: Radio Cut Prototype + Per-Shot SHA-256 Contract Caching
+* **Initial Instinct**: Jump straight into generating visuals and video clips first, and re-run the whole script whenever a line changes.
+* **What Happened**: Building the audio-only **Radio Cut** (`outputs/radio_cut/radio_cut.mp4`) and testing it with 3 family viewers immediately exposed that `shot_05` (Mesob) and `shot_07` (Coffee Ceremony) were too rushed at 7 seconds, allowing us to expand them to `11.0s` in `storyboard.json` *before* spending GPU/render time on video clips. Likewise, per-shot SHA-256 `.hash` caching in `pipeline/utils/cache.py` reduced `python run.py --all` verification runs to `~7.7s` and enabled instant single-shot regeneration (`--shot shot_06`).
+
+### Practice That Did Not Work as Assumed: Text-Only Prompting for Culturally Specific Scenes
+* **Initial Assumption**: Appending a detailed `style_block` and character descriptions to `@cf/black-forest-labs/flux-1-schnell` text prompts would be enough to keep Ethiopian cultural objects accurate across all 10 shots.
+* **What Happened**: Inspecting the actual rendered frames revealed severe cultural drift — FLUX generated generic bread rolls instead of *Gursha* injera (`shot_06`), western food shapes instead of *Doro Wat* (`shot_04`), and a white floor sheet instead of a *Mesob* (`shot_05`). Text-only prompts cannot substitute for visual reference conditioning on culturally specific objects; grounding those key shots directly in curated Habesha reference imagery (`references/`) was required to achieve authenticity.
+
+---
+
+## 9. Ceiling Work: Multilingual Amharic vs. English TTS Pacing Benchmark
+
+To go beyond the single-language floor, we built [`pipeline/benchmark_tts.py`](../pipeline/benchmark_tts.py) and ran a quantitative comparison between **Amharic (`am-ET`)** and **English (`en-US`)** across three narrative beats (`outputs/benchmarks/multilingual_tts_benchmark.json`):
+
+| Sample | Beat | Amharic Duration | English Duration | Amharic Rate | English Rate | Duration Ratio (AM/EN) |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| `sample_01` | Hearth Opening | `6.66 s` | `7.83 s` | `1.65 w/s` (`9.01 ch/s`) | `2.30 w/s` (`11.24 ch/s`) | `0.85×` |
+| `sample_02` | Gursha of Blessing | `8.72 s` | `6.09 s` | `1.38 w/s` (`7.11 ch/s`) | `2.30 w/s` (`15.44 ch/s`) | `1.43×` |
+| `sample_03` | Closing Resolution | `7.16 s` | `7.39 s` | `1.82 w/s` (`8.24 ch/s`) | `2.30 w/s` (`13.26 ch/s`) | `0.97×` |
+
+**Key Insight:** Amharic TTS exhibits much wider dynamic range (`16.27–27.72 dB` vs. `6.23 dB` in English) and slower word-per-second pacing (`1.38–1.82 w/s` vs. `2.30 w/s`), especially on reflective lines like *Gursha of Blessing* (`1.43×` longer than English). This proves that multilingual video pipelines **cannot** reuse English shot-duration heuristics — storyboard timelines must be budgeted from actual target-language TTS stem durations.
+
+---
+
+## 10. What We Would Build Next & Conclusion
+
+### Next Engineering Steps
+1. **Multimodal Reference-Conditioned Image-to-Image**: Run FLUX.2 klein / Gemini image editing with `references/` passed as image inputs once paid/organization quota is attached, eliminating manual reference framing for ritual shots.
+2. **True Diffusion Video for All 10 Shots**: Batch-render all 10 `outputs/shots/*.mp4` clips through `notebooks/04_wan2_video_generator.ipynb` on Kaggle 2×T4 / Colab and compare viewer preference against the FFmpeg Ken Burns baseline.
+3. **Interactive Family Story Web App**: Wrap `run.py` behind a lightweight Gradio/FastAPI form so non-technical relatives can enter their own Amharic family memories and export a 90-second subtitled film.
+
+### The Forward-Deployed Perspective
 This project demonstrates that the true differentiator in modern AI engineering is not access to costly proprietary frontier APIs, but **orchestration with judgement**:
 - Defining strict schema contracts that prevent errors before they cascade.
 - Crafting deterministic caching systems that make iteration instant and cost-free.
-- Combining open weights on borrowed GPUs with local CPU physical modeling.
+- Auditing actual rendered media (audio and keyframes) rather than trusting API `200 OK` responses.
 - Measuring every millisecond and decibel to deliver broadcast-certified results.
 
-A stranger can clone this repository, run `python run.py --all`, and watch an authentic Ethiopian family story come to life in exactly 90.00 seconds.
+A stranger can clone this repository, run `python run.py --all`, and produce an authentic Ethiopian family story in exactly 90.00 seconds.

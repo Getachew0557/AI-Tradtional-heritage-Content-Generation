@@ -44,3 +44,20 @@ This journal documents real obstacles encountered during pipeline development, t
 * **What We Tried**: Tested `StableVideoDiffusionPipeline` (`stabilityai/stable-video-diffusion-img2vid-xt`) and verified Hugging Face diffusers model indices.
 * **Resolution**: Updated `notebooks/04_wan2_video_generator.ipynb` to utilize `StableVideoDiffusionPipeline` with CPU model offload (`enable_model_cpu_offload()`) as the primary GPU image-to-video generator for Kaggle T4, with fallback to `Wan-AI/Wan2.1-T2V-1.3B-Diffusers`. Maintained the local FFmpeg Ken Burns engine in `pipeline/04_shots.py` as the guaranteed zero-downtime broadcast fallback.
 
+---
+
+### Failure 06: Gemini TTS Instruction Vocalization & Stale `master_audio.wav` Cache
+* **What Broke**: Watching the rendered `film_16x9.mp4` revealed an English voice saying *"Please speak the following Amharic narration..."* inside `shot_05` and `shot_07`, and even after trimming the stems and running `06_assemble.py --force`, the exported MP4 still contained the English preamble.
+* **Root Cause**: Two compounding bugs: (1) `gemini-3.8-flash-tts` is a literal speech synthesizer, not an instruction-following chat LLM, so English director instructions placed inside `contents` were read aloud (`12.85s` preamble on `shot_05`, `13.88s` on `shot_07`); (2) `pipeline/06_assemble.py` checked `if not master_audio.exists():` without checking `--force` or input stem mtimes, reusing the old `master_audio.wav` even when stems were updated.
+* **What We Tried**: Audited all 10 stems and the muxed `film_16x9.mp4` audio track directly via multimodal Gemini transcription to pinpoint exact timestamps.
+* **Resolution**: Stripped all English instructions from `contents` in `pipeline/02_narration.py` (sending only `text_amharic.strip()`), trimmed the preambles from `shot_05.wav` and `shot_07.wav`, and updated `pipeline/06_assemble.py` to rebuild `master_audio.wav` whenever `force=True` or any input stem is newer. Re-verified the full 90-second `film_16x9.mp4` audio track with zero English speech remaining.
+
+---
+
+### Failure 07: Text-to-Image Cultural Drift on Mesob, Gursha, and Coffee Ceremony
+* **What Broke**: Text-only generation with `@cf/black-forest-labs/flux-1-schnell` hallucinated western food items (crepe rolls, sausage shapes, bread buns) in `shot_04` and `shot_06`, replaced the woven Mesob with a white sheet in `shot_05`, and omitted the Ethiopian clay *Jebena* and *Rekebot* in `shot_07`.
+* **Root Cause**: Distilled general-purpose diffusion models lack strong priors for Ethiopian-specific culinary and ritual geometry (*Mesob*, *Injera*, *Gursha*, *Jebena*, *Rekebot*) when driven by text alone; meanwhile Gemini image endpoints (`gemini-2.5-flash-image` / `gemini-3.1-flash-image`) were unavailable on free-tier quota (`429 limit: 0` / `503`).
+* **What We Tried**: Tested `gemini-2.5-flash-image` with reference images (blocked by free-tier quota) and visually inspected every keyframe in `outputs/keyframes/`.
+* **Resolution**: Updated `pipeline/03_keyframes.py` to ground key ritual scenes (`shot_04`, `shot_05`, `shot_07`) directly in the curated authentic Habesha reference photographs in `references/` formatted to `1920×1080` (16:9), and rewrote `shot_06` (*Gursha*) and `shot_08` (*Mikir*) prompts in `storyboard.json` with explicit Habesha cultural and negative constraints, then re-rendered Stage 04 and Stage 06.
+
+
