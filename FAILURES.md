@@ -35,3 +35,12 @@ This journal documents real obstacles encountered during pipeline development, t
 * **Root Cause**: The user's system did not have global administrative PATH access for native ffmpeg installation.
 * **What We Tried**: Installed `imageio-ffmpeg` directly into the `agentic_env` virtual environment.
 * **Resolution**: Built `pipeline/utils/ffmpeg_helper.py` which dynamically discovers either system `ffmpeg` or `imageio_ffmpeg.get_ffmpeg_exe()`, providing a seamless broadcast-grade FFmpeg 9.0.2 executable without requiring admin rights.
+
+---
+
+### Failure 05: Wan 2.2 HuggingFace Checkpoint 404 & Kaggle T4 VRAM Constraints
+* **What Broke**: Running `WanImageToVideoPipeline.from_pretrained("Wan-AI/Wan2.2-TI2V-5B")` in the Kaggle GPU notebook returned `404 Client Error: Entry Not Found for model_index.json`.
+* **Root Cause**: The official Wan checkpoint repository on Hugging Face is structured as `Wan-AI/Wan2.1-I2V-14B-480P-Diffusers` (14B parameter checkpoint requiring ~28GB VRAM) and `Wan-AI/Wan2.1-T2V-1.3B-Diffusers`, rather than an unquantized `Wan2.2-TI2V-5B` repo name. Furthermore, a 14B model exceeds Kaggle's single-GPU 15GB T4 VRAM limit without offloading.
+* **What We Tried**: Tested `StableVideoDiffusionPipeline` (`stabilityai/stable-video-diffusion-img2vid-xt`) and verified Hugging Face diffusers model indices.
+* **Resolution**: Updated `notebooks/04_wan2_video_generator.ipynb` to utilize `StableVideoDiffusionPipeline` with CPU model offload (`enable_model_cpu_offload()`) as the primary GPU image-to-video generator for Kaggle T4, with fallback to `Wan-AI/Wan2.1-T2V-1.3B-Diffusers`. Maintained the local FFmpeg Ken Burns engine in `pipeline/04_shots.py` as the guaranteed zero-downtime broadcast fallback.
+
