@@ -73,29 +73,68 @@ ethiopian-heritage-short/
 
 ## ⚡ Quickstart: Run from a Clean Clone
 
-### 1. Setup Environment
+## ⚡ One-Command Execution: Run from a Clean Clone
+
+A stranger can clone this repository, run one single command, and regenerate the entire film from its storyboard:
+
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/Getachew0557/AI-Tradtional-heritage-Content-Generation.git
 cd AI-Tradtional-heritage-Content-Generation
 
-# Install dependencies
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# Configure environment keys
+# 3. Configure environment credentials
 cp .env.example .env
-# Edit .env with your free GEMINI_API_KEY and CLOUDFLARE credentials
+# Insert your free GEMINI_API_KEY and CLOUDFLARE_ACCOUNT_ID / TOKEN
+
+# 4. Run the entire pipeline end-to-end (All 6 stages)
+python run.py --all
 ```
 
-### 2. Verify Credentials
+### Granular Execution & Testing
 ```bash
-python pipeline/utils/test_credentials.py
+python run.py --verify           # Inspect deliverables and status without regenerating
+python run.py --stage 1          # Validate storyboard contract against JSON Schema
+python run.py --stage 2          # Synthesize Amharic narration via Gemini 3.8 Flash TTS
+python run.py --stage 3          # Generate FLUX.1 schnell keyframes via Cloudflare
+python run.py --stage 4          # Render 24fps motion shots (FFmpeg Ken Burns / Wan 2.2)
+python run.py --stage 5          # Synthesize Ethiopian score candidates & select winner
+python run.py --stage 6          # Master audio to -14 LUFS, burn subtitles & export 16:9 & 9:16
+python run.py --shot shot_06     # Test live regeneration of a single shot
 ```
 
-### 3. Validate the Storyboard Contract (Stage 1)
-```bash
-python pipeline/01_validate.py
-```
+---
+
+## 📦 Final Deliverables Summary
+
+| Deliverable | Resolution / Format | Duration | Loudness | Output Path |
+| :--- | :--- | :---: | :---: | :--- |
+| **Landscape Master** | 1920×1080 @ 24fps, H.264 / AAC | **90.00s** | **-14.0 LUFS** | [`outputs/final/film_16x9.mp4`](outputs/final/film_16x9.mp4) |
+| **Vertical Mobile Master** | 1080×1920 @ 24fps, H.264 / AAC | **90.00s** | **-14.0 LUFS** | [`outputs/final/film_9x16.mp4`](outputs/final/film_9x16.mp4) |
+| **Master Audio Track** | 48 kHz 16-bit Stereo PCM | **90.00s** | **-14.0 LUFS** | [`outputs/final/master_audio.wav`](outputs/final/master_audio.wav) |
+| **Winning Original Score** | Ethiopian Tizita Acoustic Score | **90.00s** | -16.16 dBFS | [`outputs/music/selected_score.wav`](outputs/music/selected_score.wav) |
+| **Phase 2 Rough Cut** | 1920×1080 Rough Cut Checkpoint | **90.00s** | -14.0 LUFS | [`outputs/rough_cut/rough_cut.mp4`](outputs/rough_cut/rough_cut.mp4) |
+| **Phase 1 Radio Cut** | 1920×1080 Animatic Prototype | **90.00s** | Ducked | [`outputs/radio_cut/radio_cut.mp4`](outputs/radio_cut/radio_cut.mp4) |
+
+---
+
+## 📓 Kaggle GPU Acceleration (Optional Heavy Inference)
+For running heavy open-weight models on borrowed GPUs (Kaggle dual Tesla T4s):
+1. **Wan 2.2 Video Motion**: [`notebooks/04_wan2_video_generator.ipynb`](notebooks/04_wan2_video_generator.ipynb)
+2. **ACE-Step / MusicGen Score**: [`notebooks/05_ace_step_music.ipynb`](notebooks/05_ace_step_music.ipynb)
+
+---
+
+## 📚 Core Project Documentation
+* [DESIGN.md](DESIGN.md): The human story, audience definition, character bibles, and User Tests 1 & 2.
+* [ARCHITECTURE.md](ARCHITECTURE.md): Schema contracts, multi-model state boundaries, and caching.
+* [EXPERIMENTS.md](EXPERIMENTS.md): 10 logged experiments (Hypothesis → Change → Result).
+* [FAILURES.md](FAILURES.md): Blocker & troubleshooting journal (Gemini deprecations, Kaggle token auth, FFmpeg paths, Wan 404s).
+* [COSTS.md](COSTS.md): Latency, GPU minutes, and $0.00 actual vs $14.36 frontier equivalent spend.
+* [ETHICS.md](ETHICS.md): Cultural sensitivity, consent, voice ownership, and AI transparency disclosure.
+
 
 ---
 
