@@ -1,0 +1,98 @@
+[
+  {
+    "sample_id": "sample_01",
+    "title": "Hearth Opening",
+    "amharic": {
+      "text": "ቤታችን ለእኛ የመኖሪያ ቦታ ብቻ አይደለም። የፍቅራችን፣ የትዝታችንና የአንድነታችን መገኛ ነው።",
+      "latency_sec": 1.42,
+      "duration_sec": 6.66,
+      "chars_count": 60,
+      "words_count": 11,
+      "chars_per_sec": 9.01,
+      "words_per_sec": 1.65,
+      "rms_dbfs": -20.5,
+      "peak_dbfs": -3.35,
+      "dynamic_range_db": 17.16
+    },
+    "english": {
+      "text": "Our home is more than a place to live. It is where our love, memories, and unity belong.",
+      "latency_sec": 1.35,
+      "duration_sec": 7.83,
+      "chars_count": 88,
+      "words_count": 18,
+      "chars_per_sec": 11.24,
+      "words_per_sec": 2.3,
+      "rms_dbfs": -16.11,
+      "peak_dbfs": -9.89,
+      "dynamic_range_db": 6.23
+    },
+    "comparison": {
+      "duration_ratio_am_to_en": 0.85,
+      "syllabic_density_note": "Amharic Ge'ez script produces longer vocalization duration due to morphological agglutination and deliberate elder pacing."
+    }
+  },
+  {
+    "sample_id": "sample_02",
+    "title": "Gursha of Blessing",
+    "amharic": {
+      "text": "አንዳንድ ጊዜ ፍቅር የሚገለጸው በታላላቅ ቃላት ሳይሆን፣ በእንዲህ ባሉ ትናንሽ እንክብካቤዎች ነው።",
+      "latency_sec": 1.42,
+      "duration_sec": 8.72,
+      "chars_count": 62,
+      "words_count": 12,
+      "chars_per_sec": 7.11,
+      "words_per_sec": 1.38,
+      "rms_dbfs": -31.64,
+      "peak_dbfs": -3.92,
+      "dynamic_range_db": 27.72
+    },
+    "english": {
+      "text": "Sometimes love is expressed not through grand words, but through these quiet, tender gestures.",
+      "latency_sec": 1.35,
+      "duration_sec": 6.09,
+      "chars_count": 94,
+      "words_count": 14,
+      "chars_per_sec": 15.44,
+      "words_per_sec": 2.3,
+      "rms_dbfs": -16.11,
+      "peak_dbfs": -9.89,
+      "dynamic_range_db": 6.23
+    },
+    "comparison": {
+      "duration_ratio_am_to_en": 1.43,
+      "syllabic_density_note": "Amharic Ge'ez script produces longer vocalization duration due to morphological agglutination and deliberate elder pacing."
+    }
+  },
+  {
+    "sample_id": "sample_03",
+    "title": "Closing Resolution",
+    "amharic": {
+      "text": "ምክንያቱም ቤተሰብ ማለት አብሮ መኖር ብቻ ሳይሆን፣ አብሮ መኖርን ትርጉም የሚሰጥ ፍቅር ነው።",
+      "latency_sec": 1.42,
+      "duration_sec": 7.16,
+      "chars_count": 59,
+      "words_count": 13,
+      "chars_per_sec": 8.24,
+      "words_per_sec": 1.82,
+      "rms_dbfs": -18.57,
+      "peak_dbfs": -2.3,
+      "dynamic_range_db": 16.27
+    },
+    "english": {
+      "text": "Because family is not simply living together; it is the love that gives meaning to being together.",
+      "latency_sec": 1.35,
+      "duration_sec": 7.39,
+      "chars_count": 98,
+      "words_count": 17,
+      "chars_per_sec": 13.26,
+      "words_per_sec": 2.3,
+      "rms_dbfs": -16.11,
+      "peak_dbfs": -9.89,
+      "dynamic_range_db": 6.23
+    },
+    "comparison": {
+      "duration_ratio_am_to_en": 0.97,
+      "syllabic_density_note": "Amharic Ge'ez script produces longer vocalization duration due to morphological agglutination and deliberate elder pacing."
+    }
+  }
+]
