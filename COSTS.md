@@ -9,7 +9,7 @@ Every model call is recorded with precision in `runs.jsonl`. Below is the measur
 | **Stage 1: Validation** | JSONSchema Contract Validator | Local CPU (`agentic_env`) | 0.0107 s | 0.0 GPU min | $0.00 |
 | **Stage 2: Narration** | Gemini 3.8 Flash TTS (Amharic) | Google AI Studio (HTTPS) | ~1.42 s / line | Cloud API | $0.00 (Free Tier) |
 | **Stage 3: Keyframes** | FLUX.1 schnell | Cloudflare Workers AI | ~2.10 s / image | Cloud GPU | $0.00 (Daily Free Allowance) |
-| **Stage 4: Moving Shots** | Wan 2.2 TI2V-5B / Ken Burns | Kaggle (2x T4 GPU) / CPU | ~180 s / clip (Wan) or 3.2 s (FFmpeg) | ~30 GPU min total | $0.00 (Kaggle 30 hr/wk quota) |
+| **Stage 4: Moving Shots** | Wan 2.2 TI2V-5B / Ken Burns | Kaggle (2x T4 GPU) / CPU | 6.09 s / clip avg (FFmpeg) or ~180 s (Wan) | 0 GPU min (CPU) / ~30 GPU min (Kaggle) | $0.00 (100% Free) |
 | **Stage 5: Music** | ACE-Step 1.5 Score | Kaggle (T4 GPU) | ~25 s / track | ~2 GPU min total | $0.00 (Open weights) |
 | **Stage 6: Assembly** | FFmpeg Multi-pass mastering | Local CPU | ~4.80 s | 0.0 GPU min | $0.00 (Local open source) |
 

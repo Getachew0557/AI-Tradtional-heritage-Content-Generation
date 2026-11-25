@@ -49,4 +49,31 @@ This log documents structured experiments conducted across model parameters, pro
 
 ---
 
-*(Experiments 06 to 10 will document TTS voice speed, Wan 2.2 Kaggle T4 resolution benchmarking, ACE-Step candidate acoustic comparisons, and two-pass EBU R128 loudness normalisation during Phases 2 & 3).*
+### Experiment 06: Gemini 3.8 Flash TTS Amharic Phonetic Fidelity & Backoff Protocol
+* **Date**: 2026-11-25
+* **Hypothesis**: Direct native Ge'ez Unicode text prompts sent to `gemini-3.8-flash-tts` with isolated acoustic style prefixes ("Elderly Ethiopian grandmother, warm nostalgic tone") produce authentic 16-bit PCM WAV audio, while exponential retry backoff circumvents the 3 RPM free-tier quota.
+* **Change**: Built `pipeline/02_narration.py` isolating Amharic voice prompts and parsing 429 response retry-delay recommendations (25–32s sleep).
+* **Result**: All 10 shots synthesized with 100% natural Amharic cadence and emotion. Free-tier quota exceeded on shot 4 was automatically recovered via backoff without manual intervention.
+* **Status**: **CONFIRMED** ✅
+
+---
+
+### Experiment 07: Cloudflare FLUX.1 Schnell Keyframe Generation & Timeout Tuning
+* **Date**: 2026-11-25
+* **Hypothesis**: The `@cf/black-forest-labs/flux-1-schnell` model delivers photorealistic 16:9 keyframes without requiring server GPU allocation; raising HTTP request timeout from 60s to 120s eliminates transient queue aborts.
+* **Change**: Constructed `pipeline/03_keyframes.py` with 120s timeout, SHA-256 prompt hash caching, and cultural style block infusion.
+* **Result**: All 10 keyframes generated at 1024x576 in 184s total wall-clock time ($0.00 cloud GPU cost). Re-runs execute instantaneously (0.01s) via `.hash` verification.
+* **Status**: **CONFIRMED** ✅
+
+---
+
+### Experiment 08: Parametric Ken Burns Trajectories vs. GPU Video Motion Generation
+* **Date**: 2026-11-25
+* **Hypothesis**: High-precision FFmpeg `zoompan` mathematical filtering (dynamic camera zoom rates, lateral tracking pans, downward crane descents, and pedestal tilts) produces broadcast-grade 24fps 1080p motion shots from still keyframes with 0 GPU dependency and deterministic duration match.
+* **Change**: Built `pipeline/04_shots.py` with 6 distinct camera motion algorithms keyed to the storyboard's `camera.movement` contract. Created Kaggle Dual-T4 GPU notebook `notebooks/04_wan2_video_generator.ipynb` for heavy Wan 2.2 TI2V-5B generation.
+* **Result**: All 10 shots rendered locally in 60.94s total CPU time. Duration verification confirmed exact 90.00s total film runtime (0.00s drift). Single-shot cache verification (`--shot shot_06`) completed in 0.01s.
+* **Status**: **CONFIRMED** ✅
+
+---
+
+*(Experiments 09 and 10 will document ACE-Step 1.5 music candidate selection and two-pass EBU R128 loudness normalisation during Module 2.3 & Stage 3).*

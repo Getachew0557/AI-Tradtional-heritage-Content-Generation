@@ -45,6 +45,20 @@ def run_ffmpeg(args: list[str], check: bool = True) -> subprocess.CompletedProce
     return subprocess.run(cmd, check=check, capture_output=True, text=True)
 
 
+def get_media_duration(file_path: Path) -> float:
+    """
+    Extract accurate duration in seconds from any audio/video file using FFmpeg.
+    """
+    import re
+    res = run_ffmpeg(["-i", str(file_path)], check=False)
+    match = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)", res.stderr)
+    if match:
+        h, m, s = match.groups()
+        return int(h) * 3600 + int(m) * 60 + float(s)
+    return 0.0
+
+
+
 if __name__ == "__main__":
     path = get_ffmpeg_path()
     print(f"FFmpeg binary discovered at: {path}")
