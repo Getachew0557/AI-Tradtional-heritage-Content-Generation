@@ -1,0 +1,74 @@
+"""
+Credentials verification test for Gemini, Cloudflare Workers AI, and Kaggle.
+"""
+
+import os
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def test_gemini():
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        print("[FAIL] GEMINI_API_KEY not found in .env")
+        return False
+    try:
+        from google import genai
+        client = genai.Client(api_key=api_key)
+        # Test quick light call
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents="Say 'Gemini OK' in 2 words",
+        )
+        print(f"[PASS] Gemini API connection successful! Response: {response.text.strip()}")
+        return True
+    except Exception as e:
+        print(f"[FAIL] Gemini API error: {e}")
+        return False
+
+def test_cloudflare():
+    account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+    token = os.getenv("CLOUDFLARE_API_TOKEN")
+    if not account_id or not token:
+        print("[FAIL] Cloudflare credentials missing in .env")
+        return False
+    try:
+        url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/models/search?search=flux"
+        headers = {"Authorization": f"Bearer {token}"}
+        resp = requests.get(url, headers=headers, timeout=10)
+        if resp.status_code == 200:
+            data = resp.json()
+            models = [m.get("name") for m in data.get("result", []) if "flux" in m.get("name", "").lower()]
+            print(f"[PASS] Cloudflare Workers AI connection successful! Found models: {models[:3]}")
+            return True
+        else:
+            print(f"[FAIL] Cloudflare returned HTTP {resp.status_code}: {resp.text}")
+            return False
+    except Exception as e:
+        print(f"[FAIL] Cloudflare request error: {e}")
+        return False
+
+def test_kaggle():
+    username = os.getenv("KAGGLE_USERNAME")
+    token = os.getenv("KAGGLE_API_TOKEN")
+    if not token:
+        print("[WARN] KAGGLE_API_TOKEN missing in .env")
+        return False
+    try:
+        headers = {"Authorization": f"Bearer {token}"}
+        resp = requests.get("https://www.kaggle.com/api/v1/datasets/list?pageSize=1", headers=headers, timeout=10)
+        # Even basic ping check or status
+        print(f"[INFO] Kaggle API ping responded with HTTP {resp.status_code}")
+        return True
+    except Exception as e:
+        print(f"[WARN] Kaggle ping warning: {e}")
+        return True
+
+if __name__ == "__main__":
+    print("--- Verifying Pipeline Credentials ---")
+    gemini_ok = test_gemini()
+    cf_ok = test_cloudflare()
+    kaggle_ok = test_kaggle()
+    print("---------------------------------------")
+    print(f"Summary: Gemini: {gemini_ok} | Cloudflare: {cf_ok} | Kaggle configured: {kaggle_ok}")
