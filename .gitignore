@@ -22,6 +22,8 @@ desktop.ini
 # Temporary rendering outputs (large generated binaries)
 # Keep directory structure via .gitkeep
 outputs/**/temp/
+outputs/**/concat_shots.txt
+outputs/final/raw_mix.wav
 outputs/final/*.mp4
 outputs/radio_cut/*.mp4
 outputs/rough_cut/*.mp4

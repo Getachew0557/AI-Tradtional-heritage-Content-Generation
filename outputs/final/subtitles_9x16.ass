@@ -1,0 +1,40 @@
+[Script Info]
+Title: The Memories of Our Home - 9:16 Vertical Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: AmharicTop,Ebrima,40,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,2.8,1.5,2,50,50,330,1
+Style: EnglishBottom,Ebrima,30,&H00E8E8E8,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,2.2,1.2,2,50,50,285,1
+Style: EndCardTitle,Ebrima,52,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,3.2,2.0,5,50,50,0,1
+Style: EndCardTagline,Ebrima,32,&H004FD5D6,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,2.4,1.5,5,50,50,0,1
+Style: EndCardAI,Ebrima,22,&H00C0C0C0,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,0,0,1,1.8,1.0,2,50,50,230,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.35,0:00:06.80,AmharicTop,,0,0,0,,ቤታችን ለእኛ የመኖሪያ ቦታ ብቻ አይደለም። የፍቅራችን፣ የትዝታችንና የአንድነታችን መገኛ ነው።
+Dialogue: 0,0:00:00.35,0:00:06.80,EnglishBottom,,0,0,0,,Our home is more than a place to live. It is where our love, memories, and unity belong.
+Dialogue: 0,0:00:07.35,0:00:14.80,AmharicTop,,0,0,0,,በደስታም ሆነ በፈተና ጊዜ አብረን እንቆማለን። እናቶቻችን በጥበብ ቤታችንን ያቆማሉ።
+Dialogue: 0,0:00:07.35,0:00:14.80,EnglishBottom,,0,0,0,,In times of joy and struggle, we stand united. Our mothers sustain our home with wisdom.
+Dialogue: 0,0:00:15.35,0:00:22.80,AmharicTop,,0,0,0,,ምንም ያህል ርቀን ብንሄድም፣ የቤተሰብ ፍቅር ሁልጊዜ ወደ ቤታችን ይመልሰናል።
+Dialogue: 0,0:00:15.35,0:00:22.80,EnglishBottom,,0,0,0,,No matter how far we travel, family love always brings us back home.
+Dialogue: 0,0:00:23.35,0:00:31.80,AmharicTop,,0,0,0,,አብረን እንዘጋጃለን፣ አብረን እንበላለን፣ እንሳቃለን፣ እንመካከራለን።
+Dialogue: 0,0:00:23.35,0:00:31.80,EnglishBottom,,0,0,0,,We prepare together, eat together, laugh together, and share our counsel.
+Dialogue: 0,0:00:32.35,0:00:42.80,AmharicTop,,0,0,0,,በአንድ መሶብ ዙሪያ ምግብ ብቻ ሳይሆን፣ ፍቅርን፣ ክብርንና የትውልድ አንድነትን እንካፈላለን።
+Dialogue: 0,0:00:32.35,0:00:42.80,EnglishBottom,,0,0,0,,Around one mesob, we share more than food. We share love, respect, and generational unity.
+Dialogue: 0,0:00:43.35,0:00:50.80,AmharicTop,,0,0,0,,አንዳንድ ጊዜ ፍቅር የሚገለጸው በታላላቅ ቃላት ሳይሆን፣ በእንዲህ ባሉ ትናንሽ እንክብካቤዎች ነው።
+Dialogue: 0,0:00:43.35,0:00:50.80,EnglishBottom,,0,0,0,,Sometimes love is expressed not through grand words, but through these quiet, tender gestures.
+Dialogue: 0,0:00:51.35,0:01:01.80,AmharicTop,,0,0,0,,የቡናው መዓዛና ጭስ ሰብስቦን፣ የልብ ጨዋታና የእንግዳ ተቀባይነት ወጋችን ይፈሳል።
+Dialogue: 0,0:00:51.35,0:01:01.80,EnglishBottom,,0,0,0,,The aroma and smoke of coffee gather us, making room for true hospitality and heartfelt conversations.
+Dialogue: 0,0:01:02.35,0:01:11.80,AmharicTop,,0,0,0,,የአባቶቻችን ባህል፣ የእናቶቻችን ምክርና የቤተሰባችን ፍቅር ከትውልድ ወደ ትውልድ ይተላለፋል።
+Dialogue: 0,0:01:02.35,0:01:11.80,EnglishBottom,,0,0,0,,The traditions of our ancestors, the counsel of our mothers, and our family love pass from generation to generation.
+Dialogue: 0,0:01:12.35,0:01:22.80,AmharicTop,,0,0,0,,ምክንያቱም ቤተሰብ ማለት አብሮ መኖር ብቻ ሳይሆን፣ አብሮ መኖርን ትርጉም የሚሰጥ ፍቅር ነው።
+Dialogue: 0,0:01:12.35,0:01:22.80,EnglishBottom,,0,0,0,,Because family is not simply living together; it is the love that gives meaning to being together.
+Dialogue: 0,0:01:23.20,0:01:29.80,EndCardTitle,,0,0,0,,የቤታችን ትውስታ\NThe Memories of Our Home
+Dialogue: 0,0:01:23.20,0:01:29.80,EndCardTagline,,0,0,0,,ባህላችን በእኛ ውስጥ ይኖራል። | Our traditions live through us.
+Dialogue: 0,0:01:23.20,0:01:29.80,EndCardAI,,0,0,0,,Created with AI-assisted pipeline orchestration (Gemini 3.8 Flash, FLUX, Wan 2.2, ACE-Step 1.5, FFmpeg).

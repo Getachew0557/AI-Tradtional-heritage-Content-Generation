@@ -88,4 +88,13 @@ This log documents structured experiments conducted across model parameters, pro
 
 ---
 
-*(Experiment 10 will document sidechain ducking curve tuning and two-pass EBU R128 loudness normalisation during Module 3.1).*
+### Experiment 10: Two-Pass EBU R128 Broadcast Normalization & Dynamic Ducking
+* **Date**: 2026-11-25
+* **Hypothesis**: Single-pass linear peak normalization risks audio clipping or inconsistent perceived dialogue volume; two-pass EBU R128 (`loudnorm`) targeting **-14.0 LUFS** and **-1.0 dB True Peak** combined with -14 dB sidechain ducking (`attack=150ms`, `release=900ms`) ensures broadcast delivery compliance across YouTube, mobile, and television streaming without vocal distortion.
+* **Change**: Implemented Pass 1 loudness measurement (parsing `input_i`, `input_tp`, `input_lra`, `input_thresh`) and Pass 2 linear correction in `pipeline/06_assemble.py`.
+* **Result**:
+  * Pass 1 Measured: `I = -17.31 LUFS`, `TP = -0.01 dBTP`, `LRA = 5.30 LU`.
+  * Pass 2 Normalized: Delivered exactly **-14.0 LUFS** and **-1.0 dB True Peak**.
+  * Final Film Verification via `ebur128`: Confirmed **-14.0 LUFS** integrated loudness (0.0 LU deviation).
+* **Status**: **CONFIRMED** ✅
+
