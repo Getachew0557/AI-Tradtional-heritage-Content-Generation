@@ -24,6 +24,7 @@ This film, *"The Memories of Our Home"*, is dedicated to Ethiopian family tradit
 
 | Tool / Model | Component | License Type | Terms & Commercial Use |
 | :--- | :--- | :---: | :--- |
+| **Pipeline Repository Code** | `run.py`, `pipeline/`, `schema/`, `showcase/` | Apache License 2.0 (`LICENSE`) | Permissive open-source license with patent grant. |
 | **Google Gemini 3.8 Flash** | Script & Storyboard validation | Google AI Studio Terms of Service | Permitted for development, testing, and creative generation. |
 | **Gemini 3.8 Flash TTS** | Amharic Narration speech synthesis | Google AI Studio Terms of Service | Permitted speech generation. |
 | **FLUX.1 schnell** | Keyframe generation (Cloudflare) | Apache 2.0 | Open weights, commercial and personal use allowed. |

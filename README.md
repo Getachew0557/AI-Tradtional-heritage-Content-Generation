@@ -193,4 +193,4 @@ Results are saved to [`outputs/benchmarks/multilingual_tts_benchmark.json`](outp
 ## 🛡️ License & Ethics
 * **Content Consent**: All likenesses and voices are governed by informed consent recorded in `ETHICS.md`.
 * **AI Disclosure**: Clearly labeled with on-screen end card disclosure and platform tags.
-* **Code License**: MIT License. Model weights are Apache 2.0 (Wan 2.2), MIT (ACE-Step), and permissive free APIs.
+* **Code License**: Apache License 2.0 ([LICENSE](LICENSE)). Model weights are Apache 2.0 (Wan 2.2, FLUX.1 schnell), MIT (ACE-Step 1.5), and permissive free APIs.
