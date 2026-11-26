@@ -87,8 +87,8 @@ A stranger can clone this repository, run one single command, and regenerate the
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Getachew0557/AI-Tradtional-heritage-Content-Generation.git
-cd AI-Tradtional-heritage-Content-Generation
+git clone https://github.com/Getachew0557/heritage-short-ai-film.git
+cd heritage-short-ai-film
 
 # 2. Install dependencies
 pip install -r requirements.txt

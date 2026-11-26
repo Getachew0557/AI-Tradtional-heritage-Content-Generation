@@ -1,7 +1,7 @@
 # Final Engineering & Artistic Report: "የቤታችን ትውስታ" (The Memories of Our Home)
 ### AI-Content Generation: The Heritage Short Challenge (TenX Bi-Weekly Challenge)
 **Author**: Getachew Getu Enyew  
-**Repository**: [AI-Tradtional-heritage-Content-Generation](https://github.com/Getachew0557/AI-Tradtional-heritage-Content-Generation)  
+**Repository**: [heritage-short-ai-film](https://github.com/Getachew0557/heritage-short-ai-film)  
 **Date**: November 2026  
 **Language**: Amharic (`am-ET`) with English subtitles (`en-US`)  
 **Target Duration**: Exactly 90.00 Seconds  
